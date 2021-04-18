@@ -28,6 +28,7 @@ class InvoiceItem < ApplicationRecord
 
   def self.by_merchant(merchant)
     merchant.invoices.uniq
+  end
 
   # this currently returns all merchant_id's by highest revenue
   def self.highest_revenue_merchant_ids

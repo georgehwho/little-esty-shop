@@ -8,8 +8,8 @@ Rails.application.routes.draw do
     end
     scope module: :merchants do
       resources :invoices, only: [:show, :index]
+      resources :items, only: [:index, :show]
     end
-     resources :items, only: [:index, :show]
   end
 
 
