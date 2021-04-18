@@ -3,12 +3,12 @@
 
 <h2> <%= @merchant.name %> </h2>
 
-<h3>My items</h3>
+<h3>My Items</h3>
 
 <div class="item-index">
-  <ul>
+  <ol>
     <% @items.each do |item| %>
-      <%= item.id %> 
+      <%= item.name %> <%= link_to merchant_item_path(item.id) %>
     <% end %>
-  </ul>
+  </ol>
 </div>

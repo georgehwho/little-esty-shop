@@ -18,7 +18,7 @@ RSpec.describe "Merchant Items Index Page" do
       @item_5 = create(:random_item, id: 5, merchant_id: 22)
       @item_6 = create(:random_item, id: 6, merchant_id: 22)
 
-      visit merchant_items_path(@merchant)
+      visit merchant_items_path(@merchant.id)
     end
     it "I see a list of the names of all my items" do
       expect(page).to have_content(@item_1.name)
