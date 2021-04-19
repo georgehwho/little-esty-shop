@@ -1,16 +1,19 @@
 require 'rails_helper'
 
 RSpec.describe "As a Merchant" do
-  before { @merchant = create(:random_merchant) }
+  before {
+    @merchant = create(:random_merchant)
+  }
+
   context "When I visit my merchant dashboard" do
     it "I see the name of my merchant" do
-      visit dashboard_merchant_path(@merchant)
+      visit merchant_dashboard_index_path(@merchant)
 
       expect(page).to have_content(@merchant.name)
     end
 
     it "I see a link to my merchant items and invoices index" do
-      visit dashboard_merchant_path(@merchant)
+      visit merchant_dashboard_index_path(@merchant)
 
       expect(page).to have_link('My Items')
       expect(page).to have_link('My Invoices')
@@ -31,8 +34,8 @@ RSpec.describe "As a Merchant" do
       invoice_item_6 = create(:random_invoice_item, item: item_6, status: 2)
       item_7 = create(:random_item)
 
-      visit dashboard_merchant_path(@merchant)
-      
+      visit merchant_dashboard_index_path(@merchant)
+
       within ".merchant-items" do
         expect(page).to have_content(item_1.name)
         expect(page).to have_content(item_2.name)
@@ -43,7 +46,6 @@ RSpec.describe "As a Merchant" do
         expect(page).to_not have_content(item_7.name)
         expect(page).to have_link(invoice_item_1.invoice_id)
       end
-
     end
 
     it "I see the date the invoice was created, oldest to newest" do
@@ -61,7 +63,7 @@ RSpec.describe "As a Merchant" do
       invoice_item_6 = create(:random_invoice_item, item: item_6, status: 2)
       item_7 = create(:random_item)
 
-      visit dashboard_merchant_path(@merchant)
+      visit merchant_dashboard_index_path(@merchant)
 
       within ".merchant-items" do
         expect(page).to have_content(invoice_item_1.invoice.created_at.strftime("%A, %B %d, %Y"))
@@ -105,7 +107,7 @@ RSpec.describe "As a Merchant" do
       transaction_5 = create(:random_transaction, result: 1, invoice: invoice_5)
       transaction_6 = create(:random_transaction, result: 0, invoice: invoice_6)
 
-      visit dashboard_merchant_path(merchant)
+      visit merchant_dashboard_index_path(merchant)
 
       within ".favorite-customers" do
         expect(page).to have_content(customer_1.name)

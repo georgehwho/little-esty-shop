@@ -1,16 +1,36 @@
-<h1>Merchants Invoices show page</h1>
+<%= render 'merchants/header', locals: {merchant_id: @merchant} %>
+<h1> Merchants Invoices show page </h1>
 
-<h3>Invoice # <%= @invoice.id %></h3>
+<h3> Invoice # <%= @invoice.id %> </h3>
 
 <section>
-  <p>Status: <%= @invoice.status %></p>
+  <p>
+    <%= form_with model: [:merchant, @invoice] do |form| %>
+                <%= form.label :status %>
+                <%= form.select :status, ['in progress', 'cancelled', 'completed'] %>
+                <%= form.submit %>
+              <% end %>
+  </p>
   <p>Created on: <%= @invoice.created_at.strftime("%A, %B %d, %Y") %></p>
 </section>
+
+<div class="total-revenue">
+  <p>Total Revenue: <%= number_to_currency(@invoice.total_revenue) %> </p>
+</div>
 
 <div class="customer">
   <h2>Customer:</h2>
   <ul>
     <li><%= @invoice.customer.name %></li>
   </ul>
+</div>
+
+<div class="show-items">
+  <h2>Items on this Invoice:</h2>
+    <ul>
+      <% @invoice_items.each do |item| %>
+      <li><%= item.name %>---<%= item.quantity_ordered %>---<%= number_to_currency(item.price_sold) %>---<%= item.status %></li>
+      <% end %>
+    </ul>
 
 </div>

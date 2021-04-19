@@ -50,4 +50,20 @@ class InvoiceItem < ApplicationRecord
     .first
     .created_at
   end
+
+  def self.invoice_items_details(invoice)
+    find_by_sql("SELECT inv.id, i.name AS name,
+                ii.quantity AS quantity_ordered,
+                ii.unit_price AS price_sold,
+                ii.status AS status
+                FROM invoice_items ii
+                INNER JOIN items i
+                ON i.id=ii.item_id
+                INNER JOIN merchants m
+                ON m.id=i.merchant_id
+                INNER JOIN invoices inv
+                ON inv.id=ii.invoice_id
+                WHERE inv.id=#{invoice.id}"
+              )
+  end
 end

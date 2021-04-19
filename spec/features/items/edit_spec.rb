@@ -23,16 +23,16 @@ RSpec.describe "Merchant Items Show Page" do
 
     it "I fill in new attributes and click 'submit' and the item is updated" do
       fill_in 'Name', with: 'New Name'
-      fill_in 'Description', with: 'Dildo'
-      fill_in 'Price', with: 69420
+      fill_in 'Description', with: 'description'
+      fill_in 'Price', with: 420
 
       click_on 'Submit'
 
       expect(current_path).to eq(merchant_item_path(@item_1))
       expect(page).to have_content('Item successfully updated!')
       expect(page).to have_content('New Name')
-      expect(page).to have_content('Dildo')
-      expect(page).to have_content(69420)
+      expect(page).to have_content('description')
+      expect(page).to have_content(420)
     end
   end
 end

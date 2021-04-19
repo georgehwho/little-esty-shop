@@ -3,11 +3,9 @@ Rails.application.routes.draw do
   root to: 'application#welcome'
 
   resources :merchants, only: [:show, :create] do
-    member do
-      get :dashboard
-    end
     scope module: :merchants do
-      resources :invoices, only: [:show, :index]
+      resources :dashboard, only: [:index]
+      resources :invoices, only: [:show, :index, :update]
       resources :items, only: [:index, :show]
     end
   end

@@ -1,3 +1,4 @@
+<%= render 'merchants/header', locals: {merchant_id: @merchant} %>
 <h5>Merchant Invoices Index</h5>
 
 <h2> <%= @merchant.name %> </h2>
@@ -7,7 +8,7 @@
 <div class="invoice-index">
   <ul>
     <% @invoice_items.each do |invoice| %>
-    <li>Invoice #  <%= invoice.id %>  </li>
+    <li>Invoice #  <%= link_to invoice.id, merchant_invoice_path(@merchant, invoice.id) %>  </li>
     <% end %>
   </ul>
 </div>

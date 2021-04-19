@@ -1,9 +1,7 @@
 <div class="sub_header">
-  <h2>Merchant Dashboard</h2>
-
-  <div class="sub_header_item">
-    <%= link_to "Dashboard", dashboard_merchant_path %>
-    <%= link_to "My Items", merchant_items_path(:merchant_id) %>
-    <%= link_to "My Invoices", merchant_invoice_path(:merchant_id) %>
-  </div>
+  <nav class="sub_header_item">
+    <%= link_to "Dashboard", merchant_dashboard_index_path %>
+    <%= link_to "My Items", controller: "merchants/items", action: "index", merchant_id: @merchant %>
+    <%= link_to "My Invoices", controller: "merchants/invoices", action: "index", merchant_id: @merchant %>
+  </nav>
 </div>
