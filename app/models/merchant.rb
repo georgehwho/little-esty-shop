@@ -1,6 +1,7 @@
 class Merchant < ApplicationRecord
   default_scope {order(:name)}
 
+  has_many :bulk_discounts, dependent: :destroy
   has_many :items, dependent: :destroy
   has_many :invoice_items, through: :items
   has_many :invoices, through: :invoice_items
