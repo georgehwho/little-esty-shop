@@ -13,6 +13,10 @@ Little Esty Shop was built using the following technologies:
 * Ruby
 * Heroku
 
+## Schema
+
+![Schema](https://i.imgur.com/HymQzFZ.png)
+
 ## Setup
 
 This project requires Ruby 2.5.3.
