@@ -1,0 +1,12 @@
+<%= form_with model: bulk_discount, url: path do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+
+  <%= f.label :percent_discount %>
+  <%= f.text_field :percent_discount %>
+
+  <%= f.label :threshold %>
+  <%= f.text_field :threshold %>
+
+  <%= f.submit %>
+<% end %>
