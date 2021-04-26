@@ -10,5 +10,5 @@
     <span>🦧  <%= name %> - <%= service.commits_by_author(all_commits, name) %> commits  🦥</span>
   <% end %>
 </footer>
-<p>Number of Merged Pull Requests: <%= service.get_pull_requests.size - 1%></p>
+<p>Number of Merged Pull Requests: <%= service.get_pull_requests.size %></p>
 <h3> <%= service.get_repo_name %> </h3>
