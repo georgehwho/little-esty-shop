@@ -26,5 +26,16 @@ describe 'bulk discount index page' do
     it 'shows you a button to create a new bulk discount' do
       expect(page).to have_link("New Bulk Discount")
     end
+
+    context 'delete bulk discount' do
+      it 'can delete a bulk discount' do
+        expect(page).to have_content(@bd_1.name)
+        within "#bd-#{@bd_1.id}" do
+          expect(page).to have_link("Delete")
+          click_on "Delete"
+        end
+        expect(page).to_not have_content(@bd_1.name)
+      end
+    end
   end
 end
