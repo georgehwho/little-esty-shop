@@ -1,0 +1,3 @@
+<%= render 'merchants/header', locals: {merchant_id: @merchant} %>
+
+<%= render partial: 'form', locals: {path: merchant_bulk_discounts_path, bulk_discount: @bulk_discount} %>

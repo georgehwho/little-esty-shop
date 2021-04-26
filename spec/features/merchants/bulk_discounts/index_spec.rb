@@ -22,5 +22,9 @@ describe 'bulk discount index page' do
       expect(page).to have_content(@bd_2.threshold)
       expect(page).to have_content(@bd_2.percent_discount)
     end
+
+    it 'shows you a button to create a new bulk discount' do
+      expect(page).to have_link("New Bulk Discount")
+    end
   end
 end
