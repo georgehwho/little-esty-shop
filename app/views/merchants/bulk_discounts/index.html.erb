@@ -23,3 +23,15 @@
     <% end %>
   </table>
 </div>
+
+<h2>Upcoming Holidays</h2>
+<% service = HolidayService.new %>
+<ol>
+<% service.next_us_holidays.each do |holiday| %>
+  <li>
+    <span>
+      <%= holiday[:name] %> <%= holiday[:date] %>
+    </span>
+  </li>
+<% end %>
+</ol>
