@@ -3,6 +3,7 @@ class Item < ApplicationRecord
 
   has_many :invoice_items, dependent: :destroy
   has_many :invoices, through: :invoice_items
+  has_many :bulk_discounts, through: :merchant
 
   validates_presence_of :name, :description
   validates :unit_price, presence: true, numericality: true
