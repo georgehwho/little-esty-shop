@@ -1,7 +1,8 @@
 <div class="sub_header">
   <nav class="sub_header_item">
     <%= link_to "Dashboard", merchant_dashboard_index_path %>
-    <%= link_to "My Items", controller: "merchants/items", action: "index", merchant_id: @merchant %>
-    <%= link_to "My Invoices", controller: "merchants/invoices", action: "index", merchant_id: @merchant %>
+    <%= link_to "My Items", merchant_items_path %>
+    <%= link_to "My Invoices", merchant_invoices_path %>
+    <%= link_to "My Discounts", merchant_bulk_discounts_path %>
   </nav>
 </div>
