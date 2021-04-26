@@ -34,6 +34,7 @@ describe 'bulk discount index page' do
           expect(page).to have_link("Delete")
           click_on "Delete"
         end
+        expect(current_path).to eq("/merchants/#{@merchant.id}/bulk_discounts")
         expect(page).to_not have_content(@bd_1.name)
       end
     end
