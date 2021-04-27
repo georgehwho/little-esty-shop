@@ -38,6 +38,19 @@ RSpec.describe Invoice, type: :model do
       end
     end
 
+    describe '#total_discount_items' do
+      it 'example 1' do
+        merchant = create(:random_merchant)
+        discount = create(:random_bulk_discount, merchant: merchant, threshold: 10, percent_discount: 10)
+        item = create(:random_item, merchant: merchant)
+        invoice = create(:random_invoice)
+        inv_item_1 = create(:random_invoice_item, unit_price: 20, quantity: 5, invoice: invoice, item: item)
+        inv_item_2 = create(:random_invoice_item, unit_price: 100, quantity: 5, invoice: invoice, item: item)
+
+        expect(invoice.total_discount_items).to eq([])
+      end
+    end
+
     describe '#total_discount' do
       it 'example 1' do
         merchant = create(:random_merchant)
