@@ -29,16 +29,34 @@
 <div class="customer">
   <h2>Customer:</h2>
   <ul>
-    <li><%= @invoice.customer.name %></li>
+    <li><%= @customer.name %></li>
   </ul>
 </div>
 
-<div class="show-items">
-  <h2>Items on this Invoice:</h2>
-    <ul>
-      <% @invoice_items.each do |item| %>
-      <li><%= item.name %>---<%= item.quantity_ordered %>---<%= number_to_currency(item.price_sold) %>---<%= item.status %></li>
-      <% end %>
-    </ul>
+<h4>Items on this Invoice:</h4>
+<table class="table">
+  <thead>
+    <tr class="tr">
+      <th class="th1">Item Name</th>
+      <th class="th1">Quantity</th>
+      <th class="th1">Unit Price</th>
+    </tr>
+  </thead>
 
-</div>
+  <tbody>
+    <% discount_items = @invoice.total_discount_items %>
+    <% @invoice.invoice_items.each do |i| %>
+      <section id="the-status-<%= i.id %>">
+        <tr class="tr">
+          <td style="text-align:center"><%= i.item.name %></td>
+          <td style="text-align:center"><%= i.quantity %></td>
+          <td style="text-align:center"><%= number_to_currency(i.unit_price) %></td>
+          <td style="text-align:center"><% if discount_items.include?(i) %>
+                                          <%= link_to "#{number_to_currency(discount_items.find(i.id).total_discount)} off",
+                                                      merchant_bulk_discount_path(@merchant, discount_items.find(i.id).bd_id) %>
+                                        <% end %></td>
+        </tr>
+      </section>
+    <% end %>
+  </tbody>
+</table>

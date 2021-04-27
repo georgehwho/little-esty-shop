@@ -25,13 +25,9 @@ RSpec.describe "Merchant Invoice Show Page" do
     end
 
     it "I see information of the items on the invoice" do
-
-      within ".show-items" do
-        expect(page).to have_content(@item_1.name)
-        expect(page).to have_content(75)
-        expect(page).to have_content('$17,600.00')
-        expect(page).to have_content('pending')
-      end
+      expect(page).to have_content(@item_1.name)
+      expect(page).to have_content(75)
+      expect(page).to have_content('$17,600.00')
     end
 
     it "I see total revenue that will be generated from items on invoice" do
