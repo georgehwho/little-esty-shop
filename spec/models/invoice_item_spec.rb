@@ -4,6 +4,7 @@ RSpec.describe InvoiceItem, type: :model do
   describe "relationships" do
     it {should belong_to :invoice}
     it {should belong_to :item}
+    it {should have_many :bulk_discounts}
   end
 
   describe "validations" do
@@ -98,7 +99,7 @@ RSpec.describe InvoiceItem, type: :model do
         item_1 = create(:random_item, merchant: merchant)
         invoice_1 = create(:random_invoice)
         invoice_item_1 = create(:random_invoice_item, status: 'pending', unit_price: 17600, quantity: 75, item: item_1, invoice: invoice_1)
-      
+
         expect(InvoiceItem.invoice_items_details(invoice_1).first.status).to eq('pending')
       end
     end
