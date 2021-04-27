@@ -39,36 +39,66 @@ RSpec.describe Invoice, type: :model do
     end
 
     describe '#total_discount' do
-      it 'calculates the total discount of a invoice' do
+      it 'example 1' do
         merchant = create(:random_merchant)
-        discount = create(:random_bulk_discount, merchant: merchant, threshold: 5, percent_discount: 10)
-        discount = create(:random_bulk_discount, merchant: merchant, threshold: 4, percent_discount: 10)
+        discount = create(:random_bulk_discount, merchant: merchant, threshold: 10, percent_discount: 10)
         item = create(:random_item, merchant: merchant)
         invoice = create(:random_invoice)
+        inv_item_1 = create(:random_invoice_item, unit_price: 20, quantity: 5, invoice: invoice, item: item)
+        inv_item_2 = create(:random_invoice_item, unit_price: 100, quantity: 5, invoice: invoice, item: item)
 
         expect(invoice.total_discount).to eq(0)
-
-        inv_item_1 = create(:random_invoice_item, unit_price: 20, quantity: 5, invoice: invoice, item: item)
-        inv_item_2 = create(:random_invoice_item, unit_price: 100, quantity: 5, invoice: invoice, item: item)
-
-        expect(invoice.total_discount).to eq(60)
-
-        inv_item_3 = create(:random_invoice_item, unit_price: 100, quantity: 4, invoice: invoice, item: item)
-
-        expect(invoice.total_discount).to eq(100)
       end
 
-      it 'calculates the correct discount example 2' do
+      it 'example 2' do
+        # skip
         merchant = create(:random_merchant)
         discount = create(:random_bulk_discount, merchant: merchant, threshold: 5, percent_discount: 10)
-        discount = create(:random_bulk_discount, merchant: merchant, threshold: 4, percent_discount: 40)
+        discount = create(:random_bulk_discount, merchant: merchant, threshold: 10, percent_discount: 20)
         item = create(:random_item, merchant: merchant)
         invoice = create(:random_invoice)
+        inv_item_1 = create(:random_invoice_item, unit_price: 100, quantity: 5, invoice: invoice, item: item)
+        inv_item_2 = create(:random_invoice_item, unit_price: 100, quantity: 10, invoice: invoice, item: item)
 
-        inv_item_1 = create(:random_invoice_item, unit_price: 20, quantity: 5, invoice: invoice, item: item)
+        expect(invoice.total_discount).to eq(250)
+      end
+
+      it 'example 3' do
+        merchant = create(:random_merchant)
+        discount = create(:random_bulk_discount, merchant: merchant, threshold: 5, percent_discount: 10)
+        item = create(:random_item, merchant: merchant)
+        invoice = create(:random_invoice)
+        inv_item_1 = create(:random_invoice_item, unit_price: 20, quantity: 3, invoice: invoice, item: item)
         inv_item_2 = create(:random_invoice_item, unit_price: 100, quantity: 5, invoice: invoice, item: item)
 
-        expect(invoice.total_discount).to eq(240)
+        expect(invoice.total_discount).to eq(50)
+      end
+
+      it 'example 4' do
+        merchant = create(:random_merchant)
+        discount = create(:random_bulk_discount, merchant: merchant, threshold: 10, percent_discount: 10)
+        discount_2 = create(:random_bulk_discount, merchant: merchant, threshold: 5, percent_discount: 20)
+        item = create(:random_item, merchant: merchant)
+        invoice = create(:random_invoice)
+        inv_item_1 = create(:random_invoice_item, unit_price: 100, quantity: 10, invoice: invoice, item: item)
+        inv_item_2 = create(:random_invoice_item, unit_price: 100, quantity: 5, invoice: invoice, item: item)
+
+        expect(invoice.total_discount).to eq(300)
+      end
+
+      it 'example 5' do
+        merchant = create(:random_merchant)
+        merchant_2 = create(:random_merchant)
+        discount = create(:random_bulk_discount, merchant: merchant, threshold: 10, percent_discount: 20)
+        discount_2 = create(:random_bulk_discount, merchant: merchant, threshold: 15, percent_discount: 30)
+        item = create(:random_item, merchant: merchant)
+        item_2 = create(:random_item, merchant: merchant_2)
+        invoice = create(:random_invoice)
+        inv_item_1 = create(:random_invoice_item, unit_price: 100, quantity: 12, invoice: invoice, item: item)
+        inv_item_2 = create(:random_invoice_item, unit_price: 100, quantity: 15, invoice: invoice, item: item)
+        inv_item_3 = create(:random_invoice_item, unit_price: 100, quantity: 15, invoice: invoice, item: item_2)
+
+        expect(invoice.total_discount).to eq(690)
       end
     end
   end
