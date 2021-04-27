@@ -50,6 +50,7 @@ RSpec.describe "Merchant Invoice Show Page" do
         expect(page).to have_content('$0.00')
       end
     end
+
     it "I see a dropdown to update the invoice status" do
       # binding.pry
       expect(page).to have_button('Update Invoice')
@@ -59,6 +60,10 @@ RSpec.describe "Merchant Invoice Show Page" do
 
       expect(current_path).to eq(merchant_invoice_path(@merchant, @invoice_1))
       expect(page).to have_content("completed")
+    end
+
+    it 'shows the amount off a specific item has' do
+      expect(page).to have_content("$1,320,000.00 off")
     end
   end
 end
