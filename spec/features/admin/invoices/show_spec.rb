@@ -26,6 +26,14 @@ describe 'admin invoice show page' do
       expect(page).to have_content("$600.00")
     end
 
+    it 'shows total discount' do
+      expect(page).to have_content("$0.00")
+    end
+
+    it 'shows total profit' do
+      expect(page).to have_content("$600.00")
+    end
+
     it 'shows the customer it belongs to' do
       expect(page).to have_content(@invoice.customer.first_name)
       expect(page).to have_content(@invoice.customer.last_name)
